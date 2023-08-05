@@ -1938,6 +1938,7 @@ GameObject:
   - component: {fileID: 342432278}
   - component: {fileID: 342432279}
   - component: {fileID: 342432280}
+  - component: {fileID: 342432281}
   m_Layer: 5
   m_Name: Power
   m_TagString: Untagged
@@ -2088,6 +2089,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gx2009: {fileID: 357883445}
   buttonManager: {fileID: 1624576656}
+  touch: 0
+  air: 0
+  power: 0
   soundEffectTimer: 0
 --- !u!114 &342432280
 MonoBehaviour:
@@ -2146,6 +2150,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &342432281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342432273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf445dab266db264ca27680c5ba27fa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  touched: 0
 --- !u!1 &348780077
 GameObject:
   m_ObjectHideFlags: 0
@@ -2240,6 +2257,7 @@ GameObject:
   - component: {fileID: 357883453}
   - component: {fileID: 357883454}
   - component: {fileID: 357883455}
+  - component: {fileID: 357883456}
   m_Layer: 5
   m_Name: GX-2009
   m_TagString: Untagged
@@ -2521,6 +2539,19 @@ MonoBehaviour:
   ch4Gased: 0
   h2sGased: 0
   coGased: 0
+--- !u!114 &357883456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357883445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf445dab266db264ca27680c5ba27fa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  touched: 0
 --- !u!1 &372908978
 GameObject:
   m_ObjectHideFlags: 0
@@ -5549,7 +5580,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &979612332
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5732,6 +5763,7 @@ GameObject:
   - component: {fileID: 988886839}
   - component: {fileID: 988886842}
   - component: {fileID: 988886843}
+  - component: {fileID: 988886845}
   - component: {fileID: 988886844}
   m_Layer: 5
   m_Name: Air
@@ -5883,6 +5915,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gx2009: {fileID: 357883445}
   buttonManager: {fileID: 1624576656}
+  touch: 0
+  air: 0
+  power: 0
   soundEffectTimer: 0
 --- !u!114 &988886844
 MonoBehaviour:
@@ -5903,7 +5938,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 988886843}
           m_TargetAssemblyTypeName: TouchControls, Assembly-CSharp
-          m_MethodName: Touch
+          m_MethodName: SinglePress
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -5915,7 +5950,19 @@ MonoBehaviour:
           m_CallState: 2
         - m_Target: {fileID: 988886843}
           m_TargetAssemblyTypeName: TouchControls, Assembly-CSharp
-          m_MethodName: SinglePress
+          m_MethodName: Touch
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 357883456}
+          m_TargetAssemblyTypeName: AirTouch, Assembly-CSharp
+          m_MethodName: Touched
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -5941,6 +5988,31 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 357883456}
+          m_TargetAssemblyTypeName: AirTouch, Assembly-CSharp
+          m_MethodName: NotTouched
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &988886845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988886837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf445dab266db264ca27680c5ba27fa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  touched: 0
 --- !u!1 &1019981292
 GameObject:
   m_ObjectHideFlags: 0
@@ -6076,7 +6148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1045388560
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6095,7 +6167,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 37.559387, y: 27.569458}
+  m_AnchoredPosition: {x: 37.559326, y: 27.569458}
   m_SizeDelta: {x: 91.08099, y: 94.061005}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1045388561

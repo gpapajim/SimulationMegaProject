@@ -7,6 +7,11 @@ public class TouchControls : MonoBehaviour
     public GameObject gx2009;
     public GameObject buttonManager;
 
+    public bool touch;
+
+    public bool air;
+    public bool power;
+
     private string touchName;
     [Space]
     public float soundEffectTimer;
@@ -23,7 +28,8 @@ public class TouchControls : MonoBehaviour
             if(b.name==touchName)
             {
                 b.isPressed = true;
-            }
+                touch = true;
+            }     
         }  
         
     }
@@ -47,7 +53,7 @@ public class TouchControls : MonoBehaviour
         {
             gx2009.GetComponent<OneCal>().ChangeNumbers();
         }
-        if(touchName!="Air")
+        if (!gx2009.GetComponent<AirTouch>().touched)
         {
             if (touchName == "Power" & gx2009.GetComponent<OneCal>().inGas==true & gx2009.GetComponent<OneCal>().inOneCal==true)
             {
@@ -63,6 +69,7 @@ public class TouchControls : MonoBehaviour
             if (b.name == touchName)
             {
                 b.isPressed = false;
+                touch = false;
             }
         }
     }

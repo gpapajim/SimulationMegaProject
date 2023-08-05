@@ -21,6 +21,7 @@ public class MenuModeSD : MonoBehaviour
     public bool inMode4a;
     public bool inMode4h;
     public bool inMode4hf;
+    public bool in2_2Manual;
     public bool inCalZero;
     public bool gasIn;
     public bool gasInDone;
@@ -34,6 +35,8 @@ public class MenuModeSD : MonoBehaviour
     public int menuSelector2;
     public int menuSelector3;
     public int menuSelector4;
+    public int menuSelector2_0;
+    public int menuSelector2_0Menu;
 
     public float inModeW8;
     public float inModeW8h;
@@ -63,7 +66,13 @@ public class MenuModeSD : MonoBehaviour
     }
 
     public void Update()
-    {   ////////////////////menu selector zeroing
+    {   
+        if (!mode.normalMode)
+        {
+            lights.blinkingPower = true;
+        }
+        
+        ////////////////////menu selector zeroing
         
         if (mode.normalMode)
         {
@@ -71,8 +80,14 @@ public class MenuModeSD : MonoBehaviour
             menuSelector2 = 0;
             menuSelector3 = 0;
             menuSelector4 = 0;
+            menuSelector2_0 = 0;
+            menuSelector2_0Menu = 0;
         }
 
+        if (in2_2Manual)    ////////////call function
+        {
+            In2_2Manual();
+        }
 
         if (mode.maintenanceMode)
         {
@@ -117,6 +132,7 @@ public class MenuModeSD : MonoBehaviour
         if (inModeW8 <0)
         {
             
+
             if (mode.maintenanceMode && menuSelector == 3)//1-3
             {
                 InMode13();// me if gia na ksexwrisw apo alla modes
@@ -130,7 +146,7 @@ public class MenuModeSD : MonoBehaviour
                 ClearScreen();
             }
 
-            if (mode.maintenanceMode2 && menuSelector2 == 2 && !error.error2 && !error.error1)//2-2
+            if (mode.maintenanceMode2 && menuSelector2 == 2 && !error.error2 && !error.error1 && !in2_2Manual)//2-2
             {
                 InMode22();
                 inMode2 = true;
@@ -139,9 +155,11 @@ public class MenuModeSD : MonoBehaviour
 
             if (mode.maintenanceMode2 && menuSelector2 == 4)//2-4
             {
-                mode.maintenanceMode3 = true;
-                mode.maintenanceMode2 = false;
                 ClearScreen();
+                mode.maintenanceMode3 = true;
+                screenManager.dot.DotsControl(false, true, false, false);
+
+                mode.maintenanceMode2 = false;
             }
             if (mode.maintenanceMode3 && menuSelector3 == 16)
             {
@@ -220,6 +238,7 @@ public class MenuModeSD : MonoBehaviour
             inMode4 = false;
             inMode4a = false;
             inAuto = false;
+            screenManager.dot.DotsControl(false, true, false, false);
         }
 
         ////////////////////////////cal  start
@@ -265,6 +284,18 @@ public class MenuModeSD : MonoBehaviour
         {
             gasInTimer = 1.5f;
         }
+
+        ////////////////////////// Conn Mode
+        
+        if (mode.Conn && screenManager.C4H10.Value > 100)
+        {
+            lights.AlarmLightOn();
+        }
+
+        if (mode.Conn && screenManager.C4H10.Value < 100)
+        {
+            lights.AlarmLightOff();
+        }
       
         ///////////////////////////menu selection
         if (mode.maintenanceMode && !inMode)
@@ -300,7 +331,7 @@ public class MenuModeSD : MonoBehaviour
             }
         }
 
-        if (mode.maintenanceMode2 && !inMode2 && !inCalZero)
+        if (mode.maintenanceMode2 && !inMode2 && !inCalZero && !in2_2Manual)
         {
             switch (menuSelector2)
             {
@@ -349,6 +380,8 @@ public class MenuModeSD : MonoBehaviour
 
         if (mode.maintenanceMode3 && !inMode3)
         {
+            //screenManager.dot.DotsControl(false, true, false, false);
+
             switch (menuSelector3)
             {
                 case 0://2-4-0
@@ -459,10 +492,56 @@ public class MenuModeSD : MonoBehaviour
                     break;
             }
         }
+
+        if (mode.maintenanceMode2_0)
+        {
+            switch(menuSelector2_0)
+            {
+                case 0:
+                    
+                    screenManager.m2_00.SetActive(true);
+                    screenManager.m2_01.SetActive(false);
+                    break;
+
+                case 1:
+                    
+                    screenManager.m2_00.SetActive(false);
+                    screenManager.m2_01.SetActive(true);
+                    break;
+            }
+                
+        }
+
+        if (mode.maintenanceMode2_0Menu && !buttons.menu)
+        {
+            switch(menuSelector2_0Menu)
+            {
+                case 0:
+                    screenManager.dot.DotsControl(false, false, false, true);
+                    screenManager.cOff.SetActive(true);
+                    screenManager.cOn.SetActive(false);
+                    break;
+                case 1:
+                    screenManager.dot.DotsControl(false, false, false, true);
+                    screenManager.cOff.SetActive(false);
+                    screenManager.cOn.SetActive(true);
+                    break;
+            }
+        }
         ////////////////////////////////////////////////////////////////////////
     }
 
+    public void In2_2Manual()
+    {
+        //GasOut();
+        screenManager.blinkingScreen = true;
+    }
 
+    public void Conn()    /////test 
+    {
+        screenManager.dataObj.SetActive(true);
+        screenManager.dot.DotsControl(false, true, false, false);
+    }
 
 
 
@@ -481,8 +560,10 @@ public class MenuModeSD : MonoBehaviour
     public void InMode22()
     {
         gasNumber = Random.Range(450, 650);
-        gasIn = true;
-        screenManager.blinkingScreen = true;
+        //gasIn = true;
+        //screenManager.blinkingScreen = true;           /// den prepei na anavosvinei
+        screenManager.dataObj.SetActive(true);
+        screenManager.dot.DotsControl(false, true, false, false);
         screenManager.C4H10.Value = 0f;
         screenManager.bottleC4H10.SetActive(true);
     }
@@ -540,6 +621,7 @@ public class MenuModeSD : MonoBehaviour
         {
             screenManager.cal.SetActive(true);
             screenManager.dot.DotsControl(true, false, false, false);
+            screenManager.dataObj.SetActive(false);
         }
 
         if (calTimer < 2.5f)
@@ -625,8 +707,80 @@ public class MenuModeSD : MonoBehaviour
         }
     }
 
+    public void CircleMenuUp2_0()
+    {
+        menuSelector2_0 += 1;
+        if(menuSelector2_0 == 2)
+        {
+            menuSelector2_0 = 0;
+        }
+    }
+    public void CircleMenuDown2_0()
+    {
+        menuSelector2_0 -= 1;
+        if (menuSelector2_0 == -1)
+        {
+            menuSelector2_0 = 1;
+        }
+    }
+
+    public void CircleMenuUp2_0Menu()
+    {
+        menuSelector2_0Menu += 1;
+        if (menuSelector2_0Menu == 2)
+        {
+            menuSelector2_0Menu = 0;
+        }
+    }
+    public void CircleMenuDown2_0Menu()
+    {
+        menuSelector2_0Menu -= 1;
+        if (menuSelector2_0Menu == -1)
+        {
+            menuSelector2_0Menu = 1;
+        }
+    }
+
     public void ClearScreen()
     {
+        if (in2_2Manual)
+        {
+            screenManager.dataObj.SetActive(false);
+            screenManager.blinkingScreen = false;
+            in2_2Manual = false;
+        }
+
+        if (mode.Conn) ///////////// test
+        {
+            screenManager.cOn.SetActive(false);
+            screenManager.dot.DotsControl(false, false, false, false);
+        }
+
+        if (menuSelector2_0Menu == 0 || menuSelector2_0Menu == 1)
+        {
+            screenManager.cOff.SetActive(false);
+            screenManager.cOn.SetActive(false);
+            screenManager.dot.DotsControl(false, false, false, false);
+
+        }
+
+        if (menuSelector2_0 == 0 || menuSelector2_0 == 1)
+        {
+            screenManager.dot.DotsControl(false, false, false, false);
+            screenManager.m2_00.SetActive(false);
+            screenManager.m2_01.SetActive(false);
+        }
+
+        if (menuSelector2 == 0)
+        {
+            screenManager.m20.SetActive(false);
+        }
+
+        if (menuSelector2_0 == 1)
+        {
+            screenManager.m2_01.SetActive(false);
+        }
+
         if (menuSelector2==1)
         {
             screenManager.m21.SetActive(false);
@@ -640,6 +794,7 @@ public class MenuModeSD : MonoBehaviour
         if (menuSelector2 == 2)
         {
             screenManager.m22.SetActive(false);
+            screenManager.dot.DotsControl(false, true, false, false);    // test
         }
         if (gasInDone && (screenManager.C4H10.Value > 480 && screenManager.C4H10.Value < 520))
         {
@@ -685,5 +840,15 @@ public class MenuModeSD : MonoBehaviour
             gasInDone = true;
             gasIn = false;
         }
+    }
+
+    public void GasIn()
+    {
+        gasIn = true;
+    }
+
+    public void GasOut()
+    {
+        gasIn = false;
     }
 }

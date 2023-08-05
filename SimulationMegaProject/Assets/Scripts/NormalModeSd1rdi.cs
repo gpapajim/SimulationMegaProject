@@ -60,13 +60,17 @@ public class NormalModeSd1rdi : MonoBehaviour
                 return;
             }
 
-            if (mode.maintenanceMode || mode.maintenanceMode2 || mode.maintenanceMode3 || mode.maintenanceMode4)
+            ///otan vgainoun
+            if (mode.maintenanceMode || mode.maintenanceMode2 || mode.maintenanceMode3 || mode.maintenanceMode4 || mode.maintenanceMode2_0 || mode.maintenanceMode2_0Menu || mode.Conn)
             {
                 mode.normalMode = true;
                 mode.maintenanceMode = false;
                 mode.maintenanceMode2 = false;
                 mode.maintenanceMode3 = false;
                 mode.maintenanceMode4 = false;
+                mode.maintenanceMode2_0Menu = false;
+                mode.maintenanceMode2 = false;
+                mode.Conn = false;
                 CleanScreen();
                 SetStartScreen();
                 maintenanceEnterTimer = 3.5f;
@@ -86,7 +90,7 @@ public class NormalModeSd1rdi : MonoBehaviour
             maintenanceEnterTimer = 3.5f;
         }
 
-        if ((mode.maintenanceMode || mode.maintenanceMode2 || mode.maintenanceMode3 || mode.maintenanceMode4) && buttons.menu)
+        if ((mode.maintenanceMode || mode.maintenanceMode2 || mode.maintenanceMode3 || mode.maintenanceMode4 || mode.maintenanceMode2_0 || mode.maintenanceMode2_0Menu || mode.Conn) && buttons.menu)
         {
             maintenanceEnterTimer -= Time.deltaTime;
         }
@@ -125,7 +129,7 @@ public class NormalModeSd1rdi : MonoBehaviour
         //screen.C4H10.Value = ;
         screen.dot.DotsControl(false, false, false, false);
         
-        lights.PowerLightOff();
+        //lights.PowerLightOff();     /// test stamataei to power blink
         
        
 
@@ -164,6 +168,10 @@ public class NormalModeSd1rdi : MonoBehaviour
         screen.scores.SetActive(false);
         screen.cal.SetActive(false);
         screen.pass.SetActive(false);
+        screen.m2_00.SetActive(false);
+        screen.m2_01.SetActive(false);
+        screen.cOff.SetActive(false);
+        screen.cOn.SetActive(false);
         maintenance.inMode = false;
         maintenance.inMode2 = false;
         maintenance.inMode3 = false;
@@ -171,7 +179,11 @@ public class NormalModeSd1rdi : MonoBehaviour
         maintenance.inMode4a = false;
         maintenance.inMode4h = false;
         maintenance.inHand = false;
-        
+        mode.maintenanceMode2_0 = false;
+        mode.maintenanceMode2_0Menu = false;
+        //maintenance.menuSelector2_0 = 0;
+        //maintenance.menuSelector2_0Menu = 0;
+        mode.Conn = false;
         screen.hand.SetActive(false);
         screen.auto.SetActive(false);
 

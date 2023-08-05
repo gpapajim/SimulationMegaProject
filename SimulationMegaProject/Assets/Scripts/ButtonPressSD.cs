@@ -42,7 +42,7 @@ public class ButtonPressSD : MonoBehaviour
         {
             if (mode.maintenanceMode3)
             {
-                screen.dot.DotsControl(true, false, true, true);
+                screen.dot.DotsControl(true, true, true, true);
             }
             if (!mode.maintenanceMode3)
             {
@@ -57,7 +57,7 @@ public class ButtonPressSD : MonoBehaviour
             dotsTimer = 0.4f;
         }
         /////////////////////////////////+-10 timer
-        if ((maintenance.gasInDone || maintenance.gasIn || maintenance.inMode4h) && up)
+        if ((maintenance.inMode4h || mode.Conn || maintenance.in2_2Manual) && up)
         {
             plusTimer -= Time.deltaTime;
             plusFastTimer -= Time.deltaTime;
@@ -74,7 +74,7 @@ public class ButtonPressSD : MonoBehaviour
             plusFastTimer = 1f;
         }
 
-        if ((maintenance.gasInDone || maintenance.gasIn || maintenance.inMode4h) && down)
+        if ((maintenance.inMode4h || mode.Conn || maintenance.in2_2Manual) && down)
         {
             plusTimer -= Time.deltaTime;
             plusFastTimer -= Time.deltaTime;
@@ -125,8 +125,24 @@ public class ButtonPressSD : MonoBehaviour
         {
             maintenance.CircleMenuUp4();
         }
+
+        ///////////////////////////////////maintenance2_0
+        if (mode.maintenanceMode2_0)
+        {
+            maintenance.CircleMenuUp2_0();
+        }
+
+        if (mode.maintenanceMode2_0Menu)
+        {
+            maintenance.CircleMenuUp2_0Menu();
+        }
         /////////////////////////////////////gas in done
-        if (maintenance.gasInDone || maintenance.gasIn)
+        if (mode.Conn)
+        {
+            screen.C4H10.Value += 1;
+        }
+
+        if (maintenance.in2_2Manual)
         {
             screen.C4H10.Value += 1;
         }
@@ -165,8 +181,24 @@ public class ButtonPressSD : MonoBehaviour
         {
             maintenance.CircleMenuDown4();
         }
+
+        ///////////////////////////////////maintenance2_0
+        if (mode.maintenanceMode2_0)
+        {
+            maintenance.CircleMenuDown2_0();
+        }
+
+        if (mode.maintenanceMode2_0Menu)
+        {
+            maintenance.CircleMenuDown2_0Menu();
+        }
         /////////////////////////////////////gas in done
-        if (maintenance.gasInDone || maintenance.gasIn)
+        if (mode.Conn)
+        {
+            screen.C4H10.Value -= 1;
+        }
+
+        if (maintenance.in2_2Manual)
         {
             screen.C4H10.Value -= 1;
         }
@@ -196,22 +228,61 @@ public class ButtonPressSD : MonoBehaviour
         {
             maintenance.getInMode = true;
         }
-        
-        if (maintenance.menuSelector2 == 1 && maintenance.inMode2 )
+
+        if (maintenance.menuSelector2 == 1 && maintenance.inMode2)
         {
             maintenance.inMode2 = false;
             maintenance.inCalZero = true;
         }
+        ///////////////////////////2-0.0
+        if (maintenance.menuSelector2 == 0 && mode.maintenanceMode2)
+        {
+            maintenance.ClearScreen();
+            mode.maintenanceMode2 = false;
+            mode.maintenanceMode2_0 = true;
+            maintenance.menuSelector2_0 = 0;
+            screen.dot.DotsControl(false, true, false, false);
+        }
+        if (maintenance.menuSelector2_0 == 1 && mode.maintenanceMode2_0)
+        {
+            maintenance.ClearScreen();
+            mode.maintenanceMode2_0 = false;
+            mode.maintenanceMode2_0Menu = true;
+            //screen.dot.DotsControl(false, true, false, false);
+            return;
+        }
+        ///////// Conn
+        if (mode.maintenanceMode2_0Menu && maintenance.menuSelector2_0Menu == 1)
+        {
+            mode.Conn = true;
+            mode.maintenanceMode2_0Menu = false;
+            maintenance.ClearScreen();
+            maintenance.Conn();
+        }
+
         ///////////////////////////2-2
-        if (maintenance.menuSelector2 == 2 && !maintenance.inMode2 && !maintenance.inMode)
+        if (maintenance.menuSelector2 == 2 && !maintenance.inMode2 && !maintenance.inMode && !maintenance.in2_2Manual)
         {
             maintenance.getInMode = true;
         }
-        if (maintenance.gasInDone && (screen.C4H10.Value > 480 && screen.C4H10.Value <520))
+        /////////////////////2-2 manual
+        if (maintenance.inMode2 && maintenance.menuSelector2 == 2)
         {
-            maintenance.ClearScreen();
-            maintenance.inCalZero = true;    
+            maintenance.in2_2Manual = true;
+            maintenance.inMode2 = false;
+            return;
         }
+        if (maintenance.in2_2Manual && (screen.C4H10.Value > 480 && screen.C4H10.Value < 520))  //// den xreiazetai na to perimenei
+        {
+            maintenance.inCalZero = true;
+            //maintenance.in2_2Manual = false;
+            screen.dataObj.SetActive(false);
+            screen.blinkingScreen = false;
+            maintenance.inMode2 = false;
+            maintenance.ClearScreen();
+            return;
+        }                                 
+
         ///////////////////////////2-4
         if (maintenance.menuSelector2 == 4 && !maintenance.inMode2 && !maintenance.inMode)
         {
@@ -255,11 +326,53 @@ public class ButtonPressSD : MonoBehaviour
     public void Menu()
     {
         menu = true;
+
+        
     }
 
     public void MenuNo()
     {
         menu = false;
+        
+        if (maintenance.in2_2Manual)
+        {
+            screen.blinkingScreen = false;
+            maintenance.in2_2Manual = false;
+            maintenance.inMode2 = true;
+            screen.dataObj.SetActive(true);
+            screen.dot.DotsControl(false, true, false, false);
+            return;
+        }
+
+        if (mode.Conn) ///test
+        {
+            normal.CleanScreen();
+            screen.C4H10.Value = 0;
+            mode.Conn = false;
+            mode.maintenanceMode2_0 = true;
+            maintenance.menuSelector2_0Menu = 0;
+            screen.dot.DotsControl(false, true, false, false);
+            screen.lights.AlarmLightOff();
+            return;
+        }
+
+        if (mode.maintenanceMode2_0Menu)
+        {
+            normal.CleanScreen();
+            mode.maintenanceMode2_0 = true;
+            mode.maintenanceMode2_0Menu = false;
+            maintenance.menuSelector2_0Menu = 0;
+            screen.dot.DotsControl(false, true, false, false);
+            return;
+        }
+
+        if (mode.maintenanceMode2_0)
+        {
+            mode.maintenanceMode2 = true;
+            mode.maintenanceMode2_0 = false;
+            normal.CleanScreen(); 
+            return;
+        }
 
         if (!mode.normalMode)
         {
@@ -343,6 +456,8 @@ public class ButtonPressSD : MonoBehaviour
             mode.maintenanceMode3 = true;
             maintenance.menuSelector4 = 0;
             normal.CleanScreen();
+            screen.dot.DotsControl(false, true, false, false);
+
         }
 
         if (mode.maintenanceMode4 && maintenance.inMode4h)
@@ -351,6 +466,7 @@ public class ButtonPressSD : MonoBehaviour
             maintenance.inMode4h = false;
             maintenance.inMode4hf = false;
             screen.dataObj.SetActive(false);
+            
         }
     }
 

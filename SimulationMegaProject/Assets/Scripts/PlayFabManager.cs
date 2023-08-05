@@ -4,7 +4,7 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine.UI;
-using Newtonsoft.Json;
+//using Newtonsoft.Json;
 using TMPro;
 using UnityEngine.SceneManagement;
 

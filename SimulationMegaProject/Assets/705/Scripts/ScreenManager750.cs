@@ -24,9 +24,13 @@ public class ScreenManager750 : MonoBehaviour
     public GameObject cal;
     public GameObject ouT;
     public GameObject al;
+    public GameObject test;
     public GameObject f1;
     public GameObject f11;
     public GameObject bottle;
+
+    public GameObject cOn;
+    public GameObject cOff;
 
     public GameObject simulation;
 
@@ -207,7 +211,7 @@ public class ScreenManager750 : MonoBehaviour
         }
         ////////////////////////////////////
         
-        if(modeManager.inMode == false && modeManager.inMode2==false && modeManager.inMode3==false)
+        if(modeManager.inMode == false && modeManager.inMode2==false && modeManager.inMode3==false && !modeManager.alarmTesting)
         {
             gas = 0;
         }
@@ -242,6 +246,10 @@ public class ScreenManager750 : MonoBehaviour
             ouT.SetActive(false);
             al.SetActive(false);
             f1.SetActive(false);
+            test.SetActive(false);
+            lightManager.blinking = false;
+            lightManager.blinkingLel = false;
+            lightManager.blinkingSkip = false;
             lightManager.pw = true;
             lightManager.lel = true;
             lightManager.al = false;
@@ -250,6 +258,7 @@ public class ScreenManager750 : MonoBehaviour
             lightManager.ma = false;
             lightManager.skip = false;
             lightManager.zero = false;
+            lightManager.open = false;
         }
         if(modeManager.normalMode==false)
         {
@@ -264,6 +273,7 @@ public class ScreenManager750 : MonoBehaviour
             span.SetActive(false);
             ouT.SetActive(false);
             al.SetActive(false);
+            test.SetActive(false);
             f1.SetActive(false);
             lightManager.pw = true;
             lightManager.skip = true;
@@ -277,6 +287,7 @@ public class ScreenManager750 : MonoBehaviour
             span.SetActive(true);
             ouT.SetActive(false);
             al.SetActive(false);
+            test.SetActive(false);
             f1.SetActive(false);
             lightManager.pw = true;
             lightManager.skip = true;
@@ -291,6 +302,7 @@ public class ScreenManager750 : MonoBehaviour
             span.SetActive(false);
             ouT.SetActive(true);
             al.SetActive(false);
+            test.SetActive(false);
             f1.SetActive(false);
             lightManager.pw = true;
             lightManager.skip = true;
@@ -305,6 +317,7 @@ public class ScreenManager750 : MonoBehaviour
             span.SetActive(false);
             ouT.SetActive(false);
             al.SetActive(true);
+            test.SetActive(false);
             f1.SetActive(false);
             lightManager.pw = true;
             lightManager.skip = true;
@@ -313,12 +326,35 @@ public class ScreenManager750 : MonoBehaviour
             
         }
 
+        if(modeManager.menuMode && modeManager.test) // test
+        {
+            normalMode.SetActive(false);
+            cOff.SetActive(false);
+            cOn.SetActive(false);
+            zero.SetActive(false);
+            span.SetActive(false);
+            ouT.SetActive(false);
+            al.SetActive(false);
+            test.SetActive(true);
+            f1.SetActive(false);
+            modeManager.modeSelector2 = 0;
+            lightManager.pw = true;
+            lightManager.skip = true;
+            lightManager.blinking = true;
+            lightManager.blinkingSkip = true;
+            lightManager.span = false;
+            lightManager.zero = false;
+            lightManager.blinkingSpan = false;
+            lightManager.blinkingZero = false;
+        }
+
         if(modeManager.menuMode==true && modeManager.f1 == true)//F1
         {
             zero.SetActive(false);
             span.SetActive(false);
             ouT.SetActive(false);
             al.SetActive(false);
+            test.SetActive(false);
             f1.SetActive(true);
             lightManager.pw = true;
             lightManager.skip = true;
@@ -327,6 +363,73 @@ public class ScreenManager750 : MonoBehaviour
         }
         //////////////////////////////////////////////
         
+        ////////////////////////////////////////////// test menu
+        
+        if (modeManager.testMenuMode && modeManager.modeSelector2 == 0)
+        {
+            test.SetActive(false);
+            cOff.SetActive(true);
+            cOn.SetActive(false);
+            lightManager.pw = true;
+            lightManager.skip = true;
+            lightManager.blinking = true;
+            lightManager.blinkingSkip = true;
+        }
+
+        if (modeManager.testMenuMode && modeManager.modeSelector2 == 1)
+        {
+            test.SetActive(false);
+            cOff.SetActive(false);
+            cOn.SetActive(true);
+            lightManager.pw = true;
+            lightManager.skip = true;
+            lightManager.blinking = true;
+            lightManager.blinkingSkip = true;
+        }
+
+
+        //////////////////////////////////////////////
+
+        ////////////////////////////////////////////// alarm Testing
+
+        if (modeManager.alarmTesting)
+        {
+            normalMode.SetActive(true);
+            cOn.SetActive(false);
+            lightManager.pw = true;
+            lightManager.skip = true;
+            lightManager.span = true;
+            lightManager.zero = true;
+            lightManager.blinking = true;
+            lightManager.blinkingSkip = true;
+            lightManager.blinkingLel = true;
+            lightManager.blinkingSpan = true;
+            lightManager.blinkingZero = true;
+        }
+
+        //////////////////////////////////////////// alarm opening
+        
+        if (modeManager.alarmTesting && gas > 10)
+        {
+            lightManager.al = true;
+
+        }
+
+        if (modeManager.alarmTesting && gas > 30)
+        {
+            lightManager.al2 = true;
+        }
+
+        if (modeManager.alarmTesting && gas < 30)
+        {
+            lightManager.al2 = false;
+        }
+
+        if (modeManager.alarmTesting && gas < 10)
+        {
+            lightManager.al = false;
+        }
+
         ////////////////////////////////////////////// in mode
 
         if(modeManager.menuMode==true && modeManager.zero==true && modeManager.inMode==true)//zero
@@ -574,8 +677,8 @@ public class ScreenManager750 : MonoBehaviour
         
 
 
-        ///////////////////////////////////////////// closing
-        if(modeManager.menuMode==false && modeManager.normalMode==false)
+        ///////////////////////////////////////////// closing           test for fixing testModechange condition to ignore testMode
+        if(modeManager.menuMode==false && modeManager.normalMode==false && !modeManager.testMenuMode && !modeManager.alarmTesting)
         {
             zero.SetActive(false);
             span.SetActive(false);

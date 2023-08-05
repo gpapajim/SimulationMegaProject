@@ -32,7 +32,7 @@ public class ButtonPress805 : MonoBehaviour
         {
             Timer -= Time.deltaTime;
         }
-        if (maintenance == false && modeManager.menuMode==false)///
+        if (maintenance == false && modeManager.menuMode==false && !modeManager.alarmTesting)///
         {
             Timer = 3f;
         }
@@ -82,6 +82,30 @@ public class ButtonPress805 : MonoBehaviour
             Timer = 1f;
         }
         //////////////////////////////////////////////
+
+        ///////////////////////////////////////////// upd - down test
+
+        if ((up == true || down == true) && modeManager.alarmTesting)
+        {
+            Timer -= Time.deltaTime;
+        }
+        if ((up == false && down == false) && modeManager.alarmTesting)
+        {
+            Timer = 1.5f;
+        }
+        if (Timer < 0 && modeManager.alarmTesting)
+        {
+            if (up == true)
+            {
+                GasPlus10();
+            }
+            if (down == true)
+            {
+                GasMinus10();
+            }
+            Timer = 1f;
+        }
+
 
         ///////////////////////////////////////////// getting in menu and out
         if (Timer<0 && modeManager.normalMode==true)
@@ -140,6 +164,19 @@ public class ButtonPress805 : MonoBehaviour
             modeManager.al2 = false;
         }
 
+        if (modeManager.testMenuMode)
+        {
+            modeManager.menuMode = true;
+            modeManager.testMenuMode = false;
+            modeManager.modeSelector = 4;
+        }
+
+        if (modeManager.alarmTesting)
+        {
+            modeManager.menuMode = true;
+            modeManager.alarmTesting = false;
+            modeManager.modeSelector = 4;
+        }
 
     }
 
@@ -191,7 +228,7 @@ public class ButtonPress805 : MonoBehaviour
             modeManager.inMode = true;
             return;
         }
-        if (modeManager.menuMode==true && modeManager.inMode==false)///it had to be below specific mode sets
+        if (modeManager.menuMode==true && modeManager.inMode==false && !modeManager.test)///it had to be below specific mode sets
         {
             modeManager.inMode = true;
             modeManager.inMode2 = false;
@@ -202,7 +239,24 @@ public class ButtonPress805 : MonoBehaviour
             modeManager.inMode2 = true;
             modeManager.inMode = false;
         }
-        
+
+        if (modeManager.test)
+        {
+            modeManager.testMenuMode = true;
+            modeManager.menuMode = false;
+            modeManager.test = false;
+            return;
+        }
+
+        if (modeManager.testMenuMode && modeManager.modeSelector2 == 1)        //// 
+        {
+            modeManager.alarmTesting = true;
+            modeManager.cOn = false;
+            modeManager.testMenuMode = false;
+            return;
+        }
+
+
     }
     public void SetOff()
     {
@@ -229,10 +283,22 @@ public class ButtonPress805 : MonoBehaviour
             modeManager.CircleAlarmUp();
 
         }
+
+        if (modeManager.testMenuMode)
+        {
+            modeManager.CircleMenuUp2();
+        }
+
     }
     public void UpOff()
     {
         up = false;
+
+        if (modeManager.alarmTesting)
+        {
+            screenManager.gas += 1;
+        }
+
         if (modeManager.menuMode == true && modeManager.span == true && modeManager.inMode==true)
         {
             screenManager.gas += 1;
@@ -270,10 +336,22 @@ public class ButtonPress805 : MonoBehaviour
         {
             modeManager.CircleAlarmDown();
         }
+
+        if (modeManager.testMenuMode)
+        {
+            modeManager.CircleMenuDown2();
+        }
+
     }
     public void DownOff()
     {
         down = false;
+
+        if (modeManager.alarmTesting)
+        {
+            screenManager.gas -= 1;
+        }
+
         if (modeManager.menuMode == true && modeManager.span == true && modeManager.inMode==true)
         {
             screenManager.gas -= 1;

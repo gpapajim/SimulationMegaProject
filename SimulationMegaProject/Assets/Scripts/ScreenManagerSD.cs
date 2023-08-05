@@ -40,6 +40,8 @@ public class ScreenManagerSD : MonoBehaviour
     public GameObject m24f;
     public GameObject m24h;
     public GameObject m24i;
+    public GameObject m2_00;
+    public GameObject m2_01;
     public GameObject hand;
     public GameObject auto;
 
@@ -48,6 +50,8 @@ public class ScreenManagerSD : MonoBehaviour
     public GameObject error;
     public GameObject pass;
     public GameObject cal;
+    public GameObject cOn;
+    public GameObject cOff;
 
     public GameObject bottleC4H10;
 

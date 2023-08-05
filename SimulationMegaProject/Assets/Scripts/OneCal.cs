@@ -132,11 +132,11 @@ public class OneCal : MonoBehaviour
         {
             goInTimer = 0.5f;
         }
-        if(ofGased==true)
+        if(ofGased==true && airPressed == false)     ////////// fixing
         {
             goBackTimer -= Time.deltaTime;
         }
-        if(goBackTimer<0)
+        if(goBackTimer<0 && airPressed ==false)      /////fixx ing touch
         {
             inGas = false;
             ofGased = false;
@@ -262,7 +262,7 @@ public class OneCal : MonoBehaviour
         {
             w8ToPress = 0.5f;
         }
-        if(inGas==true & gx2009.GetComponent<CalibrationMode>().inMode==false)
+        if(inGas==true & gx2009.GetComponent<CalibrationMode>().inMode==false)   ///////////////////////////////////////////////
         {
             w8ToGetInAgain -= Time.deltaTime;
         }

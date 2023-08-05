@@ -9,20 +9,31 @@ public class ModeManager750 : MonoBehaviour
     public ExpirationState expired;
     public bool normalMode;
     public bool menuMode;
+    public bool testMenuMode;
     public bool inMode;
     public bool inMode2;
     public bool inMode3;
     [Header("menu")]
     public float modeSelector;
+    public float modeSelector2;
     public float modeSelectorAlarm;
     public bool zero;
     public bool span;
     public bool ouT;
     public bool al;
+    public bool test;
+
+    public bool cOn;
+    public bool cOff;
+
+    public bool alarmTesting;
+
     public bool f1;
     public bool al1;
     public bool al2;
     public int zeroSet;
+
+   
 
 
     public void Awake()
@@ -56,6 +67,7 @@ public class ModeManager750 : MonoBehaviour
                     span = false;
                     ouT = false;
                     al = false;
+                    test = false;
                     f1 = false;
                     break;
                 case 1:
@@ -63,6 +75,7 @@ public class ModeManager750 : MonoBehaviour
                     span = true;
                     ouT = false;
                     al = false;
+                    test = false;
                     f1 = false;
                     break;
                 case 2:
@@ -70,6 +83,7 @@ public class ModeManager750 : MonoBehaviour
                     span = false;
                     ouT = true;
                     al = false;
+                    test = false;
                     f1 = false;
                     break;
                 case 3:
@@ -77,16 +91,44 @@ public class ModeManager750 : MonoBehaviour
                     span = false;
                     ouT = false;
                     al = true;
+                    test = false;
                     f1 = false;
                     break;
-                /*case 4:
+                case 4:
                     zero = false;
                     span = false;
                     ouT = false;
                     al = false;
-                    f1 = true;
-                    break;*/
+                    test = true;
+                    f1 = false;
+                    break;
+                    /*case 5:
+                        zero = false;
+                        span = false;
+                        ouT = false;
+                        al = false;
+                        f1 = true;
+                        break;*/
 
+            }
+        }
+
+        //////////////////////////////////// test menu selection
+        
+        if (testMenuMode)
+        {
+            switch (modeSelector2)
+            {
+                case 0:
+                    test = false;
+                    cOff = true;
+                    cOn = false;
+                    break;
+                case 1:
+                    test = false;
+                    cOff = false;
+                    cOn = true;
+                    break;
             }
         }
 
@@ -117,6 +159,7 @@ public class ModeManager750 : MonoBehaviour
             al = false;
             al1 = false;
             al2 = false;
+            test = false;
             inMode = false;
             inMode2 = false;
             inMode3 = false;
@@ -133,7 +176,7 @@ public class ModeManager750 : MonoBehaviour
     public void CircleMenuUp()
     {
         modeSelector += 1;
-        if (modeSelector == 4)
+        if (modeSelector == 5)
         {
             modeSelector = 0;
         }
@@ -143,8 +186,28 @@ public class ModeManager750 : MonoBehaviour
         modeSelector -= 1;
         if (modeSelector == -1)
         {
-            modeSelector = 3;
+            modeSelector = 4;
         }
+    }
+
+    public void CircleMenuUp2()
+    {
+        modeSelector2 += 1;
+        if (modeSelector2 == 2)
+        {
+            modeSelector2 = 0;
+        }
+
+    }
+
+    public void CircleMenuDown2()
+    {
+        modeSelector2 -= 1;
+        if (modeSelector2 == -1)
+        {
+            modeSelector2 = 1;
+        }
+
     }
 
     public void CircleAlarmUp()
