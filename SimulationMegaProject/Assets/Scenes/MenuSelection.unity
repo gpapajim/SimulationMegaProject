@@ -176,7 +176,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &295028343
 RectTransform:
   m_ObjectHideFlags: 0
@@ -859,7 +859,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -936,8 +936,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 300}
+  m_AnchoredPosition: {x: 0.0006439069, y: 0.000008106232}
+  m_SizeDelta: {x: -0.0006, y: 3363.5132}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1129750976
 MonoBehaviour:
@@ -959,7 +959,127 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: dfgdgfdgfdgfdfgdgdfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  m_text: '**Helexco Gas Detection Suite**
+
+
+
+    Instructions:
+
+
+
+    **General**
+
+
+
+    Press
+    the home button at the bottom left corner of the screen to return to the previous
+    screen of the application.
+
+    Press the "Reset Simulation" button to reset
+    the simulation of the device you are using. (The device''s keyboard settings
+    will return to the default options).
+
+    The clocks and dates displayed in the
+    simulation are synchronized with the clocks and date of the device you are using.
+
+
+
+    **Initial
+    Menu**
+
+
+
+    Press the "Fixed" button to access the menu with simulations for
+    fixed heads.
+
+    Press the "Portable" button to access the menu with simulations
+    for portable heads.
+
+
+
+    **GX-2009**
+
+
+
+    The default buttons for "Air" and
+    "Power Mode" on the device are "A" and "P" respectively.
+
+    Press the gear
+    icon at the bottom left corner of the screen to visit the settings menu and make
+    changes.
+
+
+
+    **GX-8000**
+
+
+
+    The default buttons for "Air," "Power Mode,"
+    "Reset," and "Display" on the device are "A," "P," "R," and "D" respectively.
+
+    Press
+    the gear icon at the bottom left corner of the screen to visit the settings menu
+    and make changes.
+
+
+
+    **MIT License**
+
+
+
+    Copyright (c) 2023 Giorgos Papadimitriou
+
+
+
+    Permission
+    is hereby granted, free of charge, to any person obtaining a copy
+
+    of this
+    software and associated documentation files (the "Software"), to deal
+
+    in
+    the Software without restriction, including without limitation the rights
+
+    to
+    use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+
+    copies
+    of the Software, and to permit persons to whom the Software is
+
+    furnished
+    to do so, subject to the following conditions:
+
+
+
+    The above copyright notice
+    and this permission notice shall be included in all
+
+    copies or substantial
+    portions of the Software.
+
+
+
+    THE SOFTWARE IS PROVIDED "AS IS," WITHOUT WARRANTY
+    OF ANY KIND, EXPRESS OR
+
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+    OF MERCHANTABILITY,
+
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE
+
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+    DAMAGES OR OTHER
+
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+    ARISING FROM,
+
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+    DEALINGS IN THE
+
+    SOFTWARE.
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -986,11 +1106,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 25.45
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 24.6
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
@@ -1004,7 +1124,7 @@ MonoBehaviour:
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
+  m_overflowMode: 4
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
@@ -1022,7 +1142,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 0, w: 1.0084534}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1240,12 +1360,12 @@ GameObject:
   - component: {fileID: 1314503298}
   - component: {fileID: 1314503297}
   m_Layer: 5
-  m_Name: Scroll View
+  m_Name: HelpText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1314503296
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1266,8 +1386,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 690, y: -265}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchoredPosition: {x: 688, y: -231}
+  m_SizeDelta: {x: 441.4844, y: 305.2942}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1314503297
 MonoBehaviour:
@@ -1349,9 +1469,9 @@ GameObject:
   - component: {fileID: 1350990024}
   - component: {fileID: 1350990023}
   - component: {fileID: 1350990022}
-  - component: {fileID: 1350990021}
+  - component: {fileID: 1350990025}
   m_Layer: 5
-  m_Name: Help
+  m_Name: HelpButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1378,18 +1498,6 @@ RectTransform:
   m_AnchoredPosition: {x: 794, y: -430}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1350990021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1350990019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e06b0b33f8a53c4dac64ad8bcb9a424, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1350990022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1434,9 +1542,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1350990021}
-        m_TargetAssemblyTypeName: LoadPortable, Assembly-CSharp
-        m_MethodName: Portable
+      - m_Target: {fileID: 1350990025}
+        m_TargetAssemblyTypeName: Help, Assembly-CSharp
+        m_MethodName: ActivateText
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1484,6 +1592,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350990019}
   m_CullTransparentMesh: 1
+--- !u!114 &1350990025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350990019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad11d9e11656494abece149ea817575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  helpText: {fileID: 1314503295}
+  activated: 0
 --- !u!1 &1500022968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1520,9 +1642,9 @@ RectTransform:
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 0}
+  m_SizeDelta: {x: 20, y: -17}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1500022970
 MonoBehaviour:
@@ -1568,7 +1690,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2046354442}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.61
+  m_Size: 0.10470963
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1782,9 +1904,9 @@ RectTransform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 20}
+  m_SizeDelta: {x: -17, y: 20}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1583796100
 MonoBehaviour:
@@ -2132,9 +2254,9 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -17, y: -17}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1766797098
 MonoBehaviour:
@@ -2367,8 +2489,8 @@ RectTransform:
   m_Father: {fileID: 64242960}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.8952904}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
